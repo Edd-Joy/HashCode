@@ -1,4 +1,4 @@
-f = open("C:/Users/admin/Downloads/d_many_pizzas.in", "r")
+f = open("C:/Users/admin/Downloads/b_little_bit_of_everything.in", "r")
 
 firstLine = f.readline().split()
 pizzaNumber = int(firstLine[0])
@@ -7,7 +7,6 @@ threePersonTeams = int(firstLine[2])
 fourPersonTeams = int(firstLine[3])
 
 deliveredPizzas = 0
-notDeliveredPizzas = []
 totalTeams = twoPersonTeams + threePersonTeams + fourPersonTeams
 ingredientNumber = -1
 
@@ -289,38 +288,39 @@ while count < len(remainingPizzas):
 #        remainingPizzas.insert(count, list(pizza))
 #    count = count + 1
 
-print(deliveredPizzas)
+#print(deliveredPizzas)
+teamsDelivered = len(twoPersonPizzas)//2 + len(threePersonPizzas)//3 + len(fourPersonPizzas)//4
+print(teamsDelivered)
+#twoTotalScore = 0
+#threeTotalScore = 0
+#fourTotalScore = 0
 
-twoTotalScore = 0
-threeTotalScore = 0
-fourTotalScore = 0
-
-print("2 ", end= " ")
+print("2", end= " ")
 for item in twoPersonPizzas:
     print(item[0], end= " ")
-    twoTotalScore = twoTotalScore + item[2]
-print("\n3 ", end= " ")
+    #twoTotalScore = twoTotalScore + item[2]
+print("\n3", end= " ")
 for item in threePersonPizzas:
     print(item[0], end= " ")
-    threeTotalScore = threeTotalScore + item[2]
-print("\n4 ", end= " ")
+    #threeTotalScore = threeTotalScore + item[2]
+print("\n4", end= " ")
 for item in fourPersonPizzas:
     print(item[0], end= " ")
-    fourTotalScore = fourTotalScore + item[2]
+    #fourTotalScore = fourTotalScore + item[2]
 
-print("\n", twoPersonPizzas)
-print(threePersonPizzas)
-print(fourPersonPizzas)
+#print("\n", twoPersonPizzas)
+#print(threePersonPizzas)
+#print(fourPersonPizzas)
 #print(twoTemp)
 #print(threeTemp)
 #print(fourTemp)
-print(len(twoPersonPizzas)/2)
-print(len(threePersonPizzas)/3)
-print(len(fourPersonPizzas)/4)
-print(twoTotalScore * twoTotalScore)
-print(threeTotalScore * threeTotalScore)
-print(fourTotalScore * fourTotalScore)
+#print(len(twoPersonPizzas)/2)
+#print(len(threePersonPizzas)/3)
+#print(len(fourPersonPizzas)/4)
+#print(twoTotalScore * twoTotalScore)
+#print(threeTotalScore * threeTotalScore)
+#print(fourTotalScore * fourTotalScore)
 #print(twoPersonIngredients)
 #print(threePersonIngredients)
 #print(fourPersonIngredients)
-print(remainingPizzas)        
+#print(remainingPizzas)        
