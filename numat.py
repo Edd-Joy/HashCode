@@ -98,14 +98,19 @@ for i in T3Combi:
     p3_p1_sum = int(arr[p3][0]) + int(arr[p1][0])
 
     SumOfIngredients = int(arr[int(p1)][0]) + int(arr[int(p2)][0]) + int(arr[int(p3)][0])
-
-                   #AuBuC                       #AnB + BnC + CnA 
-    DiffScore_3 = SumOfIngredients - ((p1_p2_sum - TwoTeamArr[p1 -1][p2 -1]) + \
-                                        (p2_p3_sum - TwoTeamArr[p2 -1][p3 -1]) + \
-                                        (p3_p1_sum - TwoTeamArr[p3 -1][p1 -1]))
+    AnBnC = 0
+    for j in range (1, int(arr[p1][0]) + 1):
+        if (arr[p1][j] in arr[p2]):
+            if (arr[p1][j] in arr[p3]):
+                AnBnC = AnBnC + 1
+    AnB = (p1_p2_sum - TwoTeamArr[p1 -1][p2 -1])
+    BnC = (p2_p3_sum - TwoTeamArr[p2 -1][p3 -1])
+    CnA = (p3_p1_sum - TwoTeamArr[p3 -1][p1 -1])
+ 
+    DiffScore_3 = SumOfIngredients - (AnB + BnC + CnA) + AnBnC*3
                                         
-    if (DiffScore_3 < 0): ## case if AnBnC exists i,e same ingredient in 3 pizza
-        DiffScore_3 = DiffScore_3 + ((DiffScore_3 * -1) * 3)
+ #   if (DiffScore_3 < 0): ## case if AnBnC exists i,e same ingredient in 3 pizza
+ #       DiffScore_3 = DiffScore_3 + ((DiffScore_3 * -1) * 3)
     T3best.append(str(DiffScore_3) + ' ' + str(p1) + ' ' + str(p2) + ' ' + str(p3))
 print(T3best)
 
@@ -125,20 +130,43 @@ for i in T4Combi:
     p2_p4_sum = int(arr[2][0]) + int(arr[p4][0])
     p1_p3_sum = int(arr[p1][0]) + int(arr[p3][0])
 
+    AnB = (p1_p2_sum - TwoTeamArr[p1 -1][p2 -1])
+    BnC = (p2_p3_sum - TwoTeamArr[p2 -1][p3 -1])
+    CnD = (p3_p4_sum - TwoTeamArr[p3 -1][p4 -1])
+    DnA = (p4_p1_sum - TwoTeamArr[p4 -1][p1 -1])
+    BnD = (p2_p4_sum - TwoTeamArr[p2 -1][p4 -1])
+    AnC = (p1_p3_sum - TwoTeamArr[p1 -1][p3 -1])
+
     SumOfIngredients = int(arr[p1][0]) + int(arr[p2][0]) + int(arr[p3][0]) + int(arr[p4][0])
+    AnBnCnD = 0
+    AnBnC = 0
+    IngScore = 0
+    for j in range (1, int(arr[p1][0]) + 1):
+        if (arr[p1][j] in arr[p1]):
+            IngScore = IngScore + 1
+        if (arr[p1][j] in arr[p2]):
+            IngScore = IngScore + 1
+        if (arr[p1][j] in arr[p3]):
+            IngScore = IngScore + 1
+        if (arr[p1][j] in arr[p4]):
+            IngScore = IngScore + 1
+    
+ 
+        if(IngScore == 3):
+            AnBnC = AnBnC + 1
+        if(IngScore == 4):
+            AnBnCnD = AnBnCnD + 1
+        IngScore = 0            
+ 
+    if(AnBnCnD == 0):    ## if the element not in 1st pizza but the rest 3
+        for j in range (1, int(arr[p2][0]) + 1):
+            if (arr[p2][j] in arr[p3]):
+                if (arr[p2][j] in arr[p4]):
+                    AnBnC = AnBnC + 1
 
 
-    DiffScore_4 = SumOfIngredients - ((p1_p2_sum - TwoTeamArr[p1 -1][p2 -1]) + \
-                                        (p2_p3_sum - TwoTeamArr[p2 -1][p3 -1]) + \
-                                        (p3_p4_sum - TwoTeamArr[p3 -1][p4 -1]) + \
-                                        (p4_p1_sum - TwoTeamArr[p4 -1][p1 -1]) + \
-                                        (p2_p4_sum - TwoTeamArr[p2 -1][p4 -1]) + \
-                                        (p1_p3_sum - TwoTeamArr[p1 -1][p3 -1]))
+    DiffScore_4 = SumOfIngredients - (AnB + BnC + CnD + DnA + BnD + AnC) + (AnBnCnD*4 + AnBnC*3)
 
-    if (DiffScore_4 < 0): ## case if AnBnCnD exists
-        DiffScore_4 = DiffScore_4 + ((DiffScore_4 * -1) * 4)
-    elif (DiffScore_4 == 0):
-        DiffScore_4 = (DiffScore_4 + 3)
     T4best.append(str(DiffScore_4) + ' ' + str(p1) + ' ' + str(p2) + ' ' + str(p3) + ' ' + str(p4))
 print(T4best)
 
