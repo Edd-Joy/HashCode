@@ -3,12 +3,17 @@ import time
 start_time = time.time()
 print("These are the various combinations\n")
 
-f = open("a_example", "r")
+f = open("b_little_bit_of_everything", "r")
 arr = f.read().splitlines()
+f.close()
+for i in range (0, len(arr)):
+    arr[i] = arr[i].split()
 
 M = int(arr[0][0])
-for i in range (0, M +1):
-    arr[i] = arr[i].split()
+
+#print("M = ",end='') ; print(M)
+#for i in range (0, M +1):
+#    arr[i] = arr[i].split()
 
 T2 = int(arr[0][1])
 T3 = int(arr[0][2])
@@ -18,11 +23,11 @@ combi = [1,1,0]
 IngrediArr = [[0]*M for i in range(M) ]
 
 
-print(arr)
-print("DiffScore Calculation Matrix")
-print("  \t1\t2\t3\t4\t5")
+#print(arr)
+#print("DiffScore Calculation Matrix")
+#print("  \t1\t2\t3\t4\t5")
 for i in range (1,M + 1):   ## Pizza count column
-    print(i, end='')
+ #   print(i, end='')
     for j in range (1, M + 1):   ## Pizza count row
        
         DiffScore = 0
@@ -33,24 +38,23 @@ for i in range (1,M + 1):   ## Pizza count column
                     DiffScore = DiffScore + 1
                 else:
                     continue
-        print('\t' + str(DiffScore), end='')
+ #       print('\t' + str(DiffScore), end='')
         IngrediArr[i - 1][j - 1] = DiffScore
-    print()
 
-print(IngrediArr) ##Diffscore Matrix stored into this array
+#print(IngrediArr) ##Diffscore Matrix stored into this array
 
 ## For finding 2 Team Pizza Array
 ## i,e generate an array with DiffScore coressponding to used Pizzas
-print("\n\nTwo Array\n")
+#print("\n\nTwo Array\n")
 TwoTeamArr = [[0]*M for i in range(M)]
 
 for i in range (0, M):
     for j in range (0, M):
         TwoTeamArr[i][j] = IngrediArr[i][j] + IngrediArr[j][i]  ## T2 Matrix Stored
-        print('\t' + str(TwoTeamArr[i][j]), end='')
-    print()
+#        print('\t' + str(TwoTeamArr[i][j]), end='')
+#    print()
 
-print(TwoTeamArr)
+#print(TwoTeamArr)
 
 ## Representing it to a simpler array
 T2best = []
@@ -63,7 +67,9 @@ for i in range (0, M):
             continue
 for i in range (0, len(T2best)):
     T2best[i] = T2best[i].split()
-#print(T2best)  ## It has DiffScore along with pizzas for T2 #####MAIN-1
+
+print("T2best")
+print(T2best)  ## It has DiffScore along with pizzas for T2 #####MAIN-1
 
 
 ## Combinations Generator
@@ -74,16 +80,16 @@ for i in range (1, M + 1):
             for l in range (k+1, M + 1):
                 T4Combi.append(str(i) + ' ' + str(j) + ' ' + str(k) + ' ' + str(l))
 
-print("T4Combi")
-print (T4Combi)
+#print("T4Combi")
+#print (T4Combi)
 
 T3Combi = []  ## 3 Teams
 for i in range (1, M + 1):
     for j in range (i+1, M + 1):
         for k in range (j+1, M + 1):
             T3Combi.append(str(i) + ' ' + str(j) + ' ' + str(k))
-print("T3Combi")
-print(T3Combi)
+#print("T3Combi")
+#print(T3Combi)
 
 ## For finding 3 Team Pizza Array
 T3best = []
@@ -112,6 +118,7 @@ for i in T3Combi:
  #   if (DiffScore_3 < 0): ## case if AnBnC exists i,e same ingredient in 3 pizza
  #       DiffScore_3 = DiffScore_3 + ((DiffScore_3 * -1) * 3)
     T3best.append(str(DiffScore_3) + ' ' + str(p1) + ' ' + str(p2) + ' ' + str(p3))
+print("T3best")
 print(T3best)
 
 ## For finding 4 Team Pizza Array
@@ -168,6 +175,7 @@ for i in T4Combi:
     DiffScore_4 = SumOfIngredients - (AnB + BnC + CnD + DnA + BnD + AnC) + (AnBnCnD*4 + AnBnC*3)
 
     T4best.append(str(DiffScore_4) + ' ' + str(p1) + ' ' + str(p2) + ' ' + str(p3) + ' ' + str(p4))
+print("T4best")
 print(T4best)
 
 ## Scoring
